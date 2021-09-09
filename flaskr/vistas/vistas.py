@@ -2,7 +2,6 @@ from flask import request
 from flask_restful import Resource
 
 from flaskr.modelos import CancionSchema, Cancion, db
-
 cancion_schema = CancionSchema()
 
 
@@ -17,6 +16,7 @@ class VistaCanciones(Resource):
             minutos=request.json['minutos'],
             segundos=request.json['segundos'],
             interprete=request.json['interprete'])
+        db.session.add(nueva_cancion)
         db.session.commit()
         return cancion_schema.dump(nueva_cancion)
 
